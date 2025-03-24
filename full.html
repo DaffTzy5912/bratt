@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sticker Brat</title>
+    <style>
+    body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #222;
+    color: white;
+}
+
+.container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #333;
+    border-radius: 10px;
+}
+
+input, button {
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+}
+
+button {
+    background: #ff0055;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #cc0044;
+}
+
+#result img {
+    margin-top: 10px;
+    width: 200px;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sticker Brat Generator</h1>
+        <p id="info">Isi teks dan klik "Buat Sticker", lalu tunggu sampai muncul.</p>
+        <input type="text" id="textInput" placeholder="Masukkan teks...">
+        <button onclick="generateSticker()">Buat Sticker</button>
+        <div id="result"></div>
+    </div>
+    <script>
+    function generateSticker() {
+    let text = document.getElementById("textInput").value;
+    let resultDiv = document.getElementById("result");
+
+    if (!text) {
+        alert("Masukkan teks terlebih dahulu!");
+        return;
+    }
+
+    // Menampilkan pemberitahuan
+    resultDiv.innerHTML = "<p>Loading sticker...</p>";
+
+    let imageUrl = `https://ochinpo-helper.hf.space/brat?text=${encodeURIComponent(text)}`;
+
+    // Menampilkan gambar setelah loading
+    setTimeout(() => {
+        resultDiv.innerHTML = `
+            <img src="${imageUrl}" alt="Sticker Brat" id="sticker">
+            <br>
+            <a href="${imageUrl}" download="sticker_brat.webp">
+                <button>Download Sticker</button>
+            </a>
+        `;
+    }, 1500); // Simulasi loading 1.5 detik
+}
+    </script>
+</body>
+</html>
